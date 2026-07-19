@@ -4,6 +4,7 @@ Connect to a network device through SSH and run a show command.
 Use only with devices you own or are authorized to manage.
 """
 
+
 from getpass import getpass
 
 from netmiko import ConnectHandler
