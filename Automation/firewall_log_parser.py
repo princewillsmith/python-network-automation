@@ -6,6 +6,7 @@ Expected CSV columns:
 source_ip,destination_ip,application,action
 """
 
+
 import csv
 from collections import Counter
 from pathlib import Path
