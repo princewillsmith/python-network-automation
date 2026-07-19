@@ -1,49 +1,32 @@
 # Python Network Automation
 
-This repository contains simple Python tools for network troubleshooting and automation.
+This repository contains Python scripts for networking, troubleshooting, and basic network automation.
 
-The projects demonstrate practical tasks such as checking device availability, calculating subnets, connecting to network devices through SSH, backing up configurations, and analyzing firewall logs.
+The projects demonstrate practical tasks such as:
 
-## Projects
+- Checking device reachability
+- Calculating IPv4 subnets
+- Connecting to network devices with SSH
+- Backing up device configurations
+- Analyzing firewall logs
 
-### Ping Multiple Hosts
+## Repository Structure
 
-Checks whether multiple network devices are reachable.
-
-```bash
-python ping_multiple_hosts.py
-```
-
-### Subnet Calculator
-
-Displays subnet information such as the network address, broadcast address, subnet mask, and usable hosts.
-
-```bash
-python subnet_calculator.py
-```
-
-### SSH Connection
-
-Connects to a network device through SSH using Netmiko.
-
-```bash
-python ssh_connect.py
-```
-
-### Configuration Backup
-
-Connects to multiple devices and saves their running configurations locally.
-
-```bash
-python backup_configs.py
-```
-
-### Firewall Log Parser
-
-Reads a firewall log file and summarizes allowed and denied traffic.
-
-```bash
-python firewall_log_parser.py
+```text
+python-network-automation/
+├── Automation/
+│   ├── backup_configs.py
+│   ├── devices.txt
+│   ├── firewall_log_parser.py
+│   ├── firewall_logs.csv
+│   ├── requirements.txt
+│   └── ssh_connect.py
+├── Basics/
+├── Network_Tools/
+│   ├── ping_multiple_hosts.py
+│   └── subnet_calculator.py
+├── LICENSE
+└── README.md
 ```
 
 ## Requirements
@@ -54,11 +37,118 @@ python firewall_log_parser.py
 Install the required package:
 
 ```bash
-pip install -r requirements.txt
+python3 -m pip install -r Automation/requirements.txt
 ```
 
-## Security
+## How to Run the Scripts
 
-Do not store real passwords, customer IP addresses, private keys, or confidential configurations in this repository.
+Run all commands from the main repository folder.
 
-Use this project only with devices you own or are authorized to manage.
+### Ping Multiple Hosts
+
+Checks whether multiple IP addresses are reachable.
+
+```bash
+python3 Network_Tools/ping_multiple_hosts.py
+```
+
+### Subnet Calculator
+
+Calculates subnet details such as:
+
+- Network address
+- Broadcast address
+- Subnet mask
+- Prefix length
+- Total addresses
+- Usable hosts
+
+Run:
+
+```bash
+python3 Network_Tools/subnet_calculator.py
+```
+
+Example input:
+
+```text
+192.168.10.0/24
+```
+
+### Firewall Log Parser
+
+Reads sample firewall logs from a CSV file and displays:
+
+- Total log entries
+- Allowed traffic
+- Denied traffic
+- Most common applications
+- Traffic by source zone
+- Top denied source IP addresses
+
+Run:
+
+```bash
+python3 Automation/firewall_log_parser.py
+```
+
+### SSH Connection
+
+Connects to an authorized network device through SSH and runs a show command.
+
+Run:
+
+```bash
+python3 Automation/ssh_connect.py
+```
+
+This script requires:
+
+- A reachable network device
+- SSH enabled on the device
+- Valid credentials
+- The correct Netmiko device type
+
+### Configuration Backup
+
+Connects to multiple authorized devices and saves their running configurations.
+
+The device addresses are read from:
+
+```text
+Automation/devices.txt
+```
+
+Run:
+
+```bash
+python3 Automation/backup_configs.py
+```
+
+## Sample Data
+
+The repository uses sample IP addresses and sample firewall logs.
+
+Do not upload:
+
+- Real customer IP addresses
+- Production configurations
+- Passwords
+- Private keys
+- Confidential firewall exports
+
+## Skills Demonstrated
+
+- Python functions and loops
+- File handling
+- CSV parsing
+- Error handling
+- IP addressing
+- Network troubleshooting
+- SSH automation
+- Configuration backups
+- Firewall log analysis
+
+## Disclaimer
+
+Use these scripts only on systems and network devices that you own or are authorized to manage.
