@@ -1,1 +1,3 @@
-netmiko
+paramiko
+requests
+ipaddress
