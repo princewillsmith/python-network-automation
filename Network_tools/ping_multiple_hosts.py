@@ -8,7 +8,6 @@ devices = [
     "192.168.1.1",
 ]
 
-
 def ping_host(host):
     system = platform.system().lower()
 
