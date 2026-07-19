@@ -1,0 +1,7 @@
+source_ip,destination_ip,application,action
+192.168.10.20,8.8.8.8,dns,allow
+192.168.10.21,203.0.113.10,ssl,allow
+192.168.10.30,198.51.100.20,ssh,deny
+192.168.10.30,198.51.100.21,ssh,deny
+192.168.10.40,203.0.113.30,web-browsing,allow
+192.168.10.50,198.51.100.40,unknown-tcp,deny
