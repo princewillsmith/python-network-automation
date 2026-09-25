@@ -15,16 +15,24 @@ The projects demonstrate practical tasks such as:
 ```text
 python-network-automation/
 ├── Automation/
-│   ├── backup_configs.py
+│   ├── backup_configs.py          # back up running configs from devices.txt (Netmiko)
+│   ├── firewall_log_parser.py     # analyse firewall traffic logs (CSV)
+│   ├── ssh_connect.py             # run a show command over SSH
 │   ├── devices.txt
-│   ├── firewall_log_parser.py
 │   ├── firewall_logs.csv
 │   ├── requirements.txt
-│   └── ssh_connect.py
-├── Basics/
+│   └── Projects/
+│       ├── config_compliance.py   # audit IOS configs against a security baseline
+│       ├── interface_monitor.py   # flag down/err interfaces from show ip int brief
+│       ├── network_inventory.py   # build a CSV inventory from show version
+│       └── sample_data/           # sample outputs so every project runs offline
+├── Basics/                        # variables, lists, dictionaries, loops, functions
 ├── Network_Tools/
-│   ├── ping_multiple_hosts.py
-│   └── subnet_calculator.py
+│   ├── dns_lookup.py              # forward and reverse DNS lookups
+│   ├── ip_validator.py            # validate and classify IPv4/IPv6 addresses
+│   ├── ping_multiple_hosts.py     # reachability check for many hosts
+│   ├── port_checker.py            # TCP port check: open / closed / filtered
+│   └── subnet_calculator.py       # IPv4 subnet details
 ├── LICENSE
 └── README.md
 ```
@@ -73,6 +81,66 @@ Example input:
 
 ```text
 192.168.10.0/24
+```
+
+### IP Validator
+
+Validates IPv4/IPv6 addresses and classifies them as private, public, loopback, multicast, or link-local.
+
+```bash
+python3 Network_Tools/ip_validator.py
+```
+
+### DNS Lookup
+
+Forward (name → IPs) and reverse (IP → PTR) lookups.
+
+```bash
+python3 Network_Tools/dns_lookup.py
+```
+
+### Port Checker
+
+Checks TCP ports concurrently and reports **open** (handshake completed), **closed** (RST received) or **filtered** (no reply, usually a firewall drop). Useful for verifying firewall rule changes.
+
+```bash
+python3 Network_Tools/port_checker.py
+```
+
+### Configuration Compliance Audit
+
+Audits saved Cisco IOS configurations against a security baseline: SSH v2, password encryption, remote logging, NTP, no Telnet, no HTTP server, no default SNMP communities, no plain-text enable password.
+
+```bash
+python3 Automation/Projects/config_compliance.py                 # sample configs
+python3 Automation/Projects/config_compliance.py backups/        # your backups
+```
+
+Example output:
+
+```text
+sw2_running_config.txt: 0/8 checks passed
+  [FAIL] SSH version 2 enabled
+  [FAIL] No Telnet on VTY lines
+  ...
+```
+
+### Interface Monitor
+
+Parses `show ip interface brief` and flags interfaces as OK, ALERT (up/down) or SHUTDOWN.
+
+```bash
+python3 Automation/Projects/interface_monitor.py                 # sample data
+python3 Automation/Projects/interface_monitor.py --live 10.0.0.1 # live device
+```
+
+### Network Inventory
+
+Collects hostname, model, OS version, serial number and uptime from `show version` into `inventory.csv`.
+
+```bash
+python3 Automation/Projects/network_inventory.py          # sample data
+python3 Automation/Projects/network_inventory.py --live   # devices in Automation/devices.txt
 ```
 
 ### Firewall Log Parser
@@ -148,6 +216,9 @@ Do not upload:
 - SSH automation
 - Configuration backups
 - Firewall log analysis
+- Security compliance auditing
+- Parsing CLI output with regular expressions
+- Concurrent network checks (ThreadPoolExecutor)
 
 ## Disclaimer
 

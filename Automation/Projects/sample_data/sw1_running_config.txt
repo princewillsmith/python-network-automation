@@ -1,0 +1,18 @@
+hostname SW1
+!
+service password-encryption
+enable secret 9 $9$abcdefghijklmn$opqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTU
+!
+username admin privilege 15 secret 9 $9$abcdefghijklmn$opqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTU
+!
+ip domain-name lab.local
+ip ssh version 2
+!
+logging host 10.0.0.50
+ntp server 10.0.0.1
+!
+line vty 0 4
+ transport input ssh
+ login local
+!
+end

@@ -1,0 +1,14 @@
+hostname SW2
+!
+enable password cisco123
+!
+ip http server
+!
+snmp-server community public RO
+!
+line vty 0 4
+ transport input telnet ssh
+ password cisco
+ login
+!
+end

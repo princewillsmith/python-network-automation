@@ -68,7 +68,7 @@ def back_up_device(host: str, username: str, password: str) -> None:
 
 
 def main() -> None:
-    devices = load_devices("devices.txt")
+    devices = load_devices(str(Path(__file__).parent / "devices.txt"))
 
     if not devices:
         return
